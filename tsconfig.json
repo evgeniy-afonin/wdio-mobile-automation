@@ -6,7 +6,18 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": [
+      "node",
+      "webdriverio",
+      "webdriverio/globals",
+      "jasmine"
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "utils",
+    "test",
+    "**/*.ts"
+  ]
 }

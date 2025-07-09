@@ -1,7 +1,7 @@
 import { expect } from '@wdio/globals';
 import { addStep } from '@wdio/allure-reporter';
-import MainPage from '../../pageobjects/mainPage';
-import FormsPage from '../../pageobjects/formsPage';
+import MainPage from '../../../pageobjects/mainPage';
+import FormsPage from '../../../pageobjects/formsPage';
 
 describe('Checking the operation of the Forms button', () => {
 

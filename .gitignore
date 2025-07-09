@@ -1,5 +1,7 @@
 /tmp
 /out-tsc
+/allure-report
+/allure-results
 
 /node_modules
 npm-debug.log*

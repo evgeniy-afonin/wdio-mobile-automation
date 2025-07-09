@@ -1,0 +1,23 @@
+{
+  "name": "wdio-mobile-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "wdio": "wdio run wdio.conf.ts"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^5.1.8",
+    "@wdio/appium-service": "^9.17.0",
+    "@wdio/cli": "^8.34.0",
+    "@wdio/jasmine-framework": "^9.17.0",
+    "@wdio/local-runner": "^9.17.0",
+    "@wdio/spec-reporter": "^9.17.0",
+    "appium-uiautomator2-driver": "^4.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "wdio-wait-for": "^3.1.0"
+  },
+  "private": true
+}

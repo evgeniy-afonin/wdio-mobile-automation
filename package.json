@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "^5.1.8",
+    "@wdio/allure-reporter": "^9.17.0",
     "@wdio/appium-service": "^9.17.0",
     "@wdio/cli": "^8.34.0",
     "@wdio/jasmine-framework": "^9.17.0",

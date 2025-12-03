@@ -25,11 +25,9 @@ export class TouchActions {
     ): Promise<boolean> {
         for (let attempt = 0; attempt <= retries; attempt++) {
             try {
-                // Чекаємо що елементи видимі
                 await source.waitForDisplayed({timeout: 5000});
                 await destination.waitForDisplayed({timeout: 5000});
 
-                // Отримуємо центральні координати
                 const start = await this.getElementCenter(source);
                 const end = await this.getElementCenter(destination);
 
@@ -41,25 +39,17 @@ export class TouchActions {
                         id: 'finger1',
                         parameters: {pointerType: 'touch'},
                         actions: [
-                            // Переміщуємось до source елемента
                             {type: 'pointerMove', duration: 0, x: start.x, y: start.y},
-                            // Натискаємо
                             {type: 'pointerDown', button: 0},
-                            // Утримуємо для активації drag
                             {type: 'pause', duration: 500},
-                            // Повільно перетягуємо до destination
                             {type: 'pointerMove', duration: 1500, x: end.x, y: end.y},
-                            // Додаткова пауза перед відпусканням
                             {type: 'pause', duration: 300},
-                            // Відпускаємо
                             {type: 'pointerUp', button: 0},
                         ],
                     },
                 ]);
 
                 await browser.releaseActions();
-
-                // Пауза для завершення анімації
                 await browser.pause(500);
 
                 console.log(`✓ Drag action completed (attempt ${attempt + 1})`);
@@ -96,11 +86,9 @@ export class TouchActions {
         const start = await this.getElementCenter(source);
         const end = await this.getElementCenter(destination);
 
-        // Отримуємо capabilities для визначення платформи
         const capabilities = await browser.capabilities;
         const platformName = capabilities.platformName?.toLowerCase();
 
-        // Для Android
         if (platformName === 'android') {
             await browser.execute('mobile: dragGesture', {
                 elementId: await source.elementId,
@@ -108,7 +96,7 @@ export class TouchActions {
                 endY: end.y
             });
         }
-        // Для iOS
+
         else if (platformName === 'ios') {
             await browser.execute('mobile: dragFromToForDuration', {
                 duration: 1.5,
@@ -118,7 +106,6 @@ export class TouchActions {
                 toY: end.y
             });
         } else {
-            // Fallback до performActions якщо платформа невідома
             console.warn('Unknown platform, using performActions as fallback');
             await this.dragAndDrop(source, destination);
         }

@@ -2,8 +2,6 @@ import {TouchActions} from '../utils/TouchActions';
 import {$, browser} from '@wdio/globals';
 
 class DragPage {
-    // ... всі попередні геттери залишаються ...
-
     public get piece1() {
         return $('~drag-l2');
     }
@@ -101,18 +99,14 @@ class DragPage {
     private async isPieceMoved(pieceAccessibilityId: string): Promise<boolean> {
         try {
             const pieceElement = await $(`~ ${pieceAccessibilityId}`);
-
-            // Короткий timeout щоб не чекати довго
             await pieceElement.waitForDisplayed({timeout: 1000, reverse: true});
             return true;
         } catch (error) {
             try {
                 const pieceElement = await $(`~ ${pieceAccessibilityId}`);
-                // Перевіряємо чи елемент взагалі існує
                 const isDisplayed = await pieceElement.isDisplayed();
                 return !isDisplayed;
             } catch {
-                // Елемент не знайдено = переміщено
                 return true;
             }
         }
@@ -147,7 +141,6 @@ class DragPage {
                 continue;
             }
 
-            // Додаткова верифікація що piece переміщено
             const isMoved = await this.isPieceMoved(pieceId);
 
             if (!isMoved) {
@@ -170,8 +163,6 @@ class DragPage {
     public async verifyPuzzleCompleted(): Promise<boolean> {
         try {
             console.log('Verifying puzzle completion...');
-
-            // Перевіряємо що з'явився текст "Congratulations"
             const congratsText = await this.congratulationsText;
             await congratsText.waitForDisplayed({timeout: 5000});
 
@@ -183,7 +174,6 @@ class DragPage {
                 return false;
             }
 
-            // Перевіряємо текст опису
             const descriptionText = await this.successDescriptionText;
             const descriptionDisplayed = await descriptionText.isDisplayed();
             console.log(`✓ Description text displayed: ${descriptionDisplayed}`);
@@ -193,7 +183,6 @@ class DragPage {
                 return false;
             }
 
-            // Перевіряємо кнопку Retry
             const retryBtn = await this.retryButton;
             const retryDisplayed = await retryBtn.isDisplayed();
             console.log(`✓ Retry button displayed: ${retryDisplayed}`);
